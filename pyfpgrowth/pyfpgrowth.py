@@ -14,7 +14,7 @@ def Load_data(filename):
 def create_initialset(dataset):
     retDict = {}
     for trans in dataset:
-        retDict[frozenset(trans)] = 1
+        retDict[frozenset(trans)] = retDict.get(frozenset(trans), 0) + 1
     return retDict
 
 #class of FP TREE node
