@@ -107,12 +107,15 @@ def Mine_Tree(FPTree, HeaderTable, minSupport, prefix, frequent_itemset):
     for basePat in bigL:
         new_frequentset = prefix.copy()
         new_frequentset.add(basePat)
+        #print('basetPat', basePat)
+        #print('new set', new_frequentset)
         #add frequent itemset to final list of frequent itemsets
-        frequent_itemset.append(new_frequentset)
+        frequent_itemset[tuple(new_frequentset)] = HeaderTable[basePat][0]
         #get all conditional pattern bases for item or itemsets
         Conditional_pattern_bases = find_prefix_path(basePat, HeaderTable[basePat][1])
         #call FP Tree construction to make conditional FP Tree
         Conditional_FPTree, Conditional_header = create_FPTree(Conditional_pattern_bases,minSupport)
-
+        print(Conditional_pattern_bases)
         if Conditional_header != None:
             Mine_Tree(Conditional_FPTree, Conditional_header, minSupport, new_frequentset, frequent_itemset)
+
