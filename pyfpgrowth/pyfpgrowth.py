@@ -48,7 +48,10 @@ def create_FPTree(dataset, minSupport):
         HeaderTable[k] = [HeaderTable[k], None]
 
     retTree = TreeNode('Null Set',1,None)
+    my_count = 0
     for itemset,count in dataset.items():
+        print(my_count)
+        my_count += 1
         frequent_transaction = {}
         for item in itemset:
             if item in frequent_itemset:
@@ -115,7 +118,7 @@ def Mine_Tree(FPTree, HeaderTable, minSupport, prefix, frequent_itemset):
         Conditional_pattern_bases = find_prefix_path(basePat, HeaderTable[basePat][1])
         #call FP Tree construction to make conditional FP Tree
         Conditional_FPTree, Conditional_header = create_FPTree(Conditional_pattern_bases,minSupport)
-        print(Conditional_pattern_bases)
+        #print(Conditional_pattern_bases)
         if Conditional_header != None:
             Mine_Tree(Conditional_FPTree, Conditional_header, minSupport, new_frequentset, frequent_itemset)
 
